@@ -1,9 +1,49 @@
 {
-  "name": "openclaw-bee",
-  "version": "0.1.0",
-  "description": "BEE — Belief Extraction Engine. Cognitive memory recall for OpenClaw.",
+  "name": "@skysphere-labs/openclaw-bee",
+  "version": "0.1.1",
+  "description": "BEE — Belief Extraction Engine. Cognitive memory persistence for OpenClaw agents.",
   "type": "module",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "openclaw": {
+    "extensions": ["./index.ts"]
+  },
+  "files": [
+    "index.ts",
+    "better-sqlite3.d.ts",
+    "openclaw.plugin.json",
+    "README.md"
+  ],
+  "scripts": {
+    "prepublishOnly": "echo 'OpenClaw loads TypeScript directly — no build step needed'"
+  },
   "dependencies": {
     "better-sqlite3": "^11.0.0"
+  },
+  "peerDependencies": {
+    "openclaw": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skysphere-labs/openclaw-bee.git"
+  },
+  "homepage": "https://github.com/skysphere-labs/openclaw-bee",
+  "bugs": {
+    "url": "https://github.com/skysphere-labs/openclaw-bee/issues"
+  },
+  "keywords": [
+    "openclaw",
+    "openclaw-plugin",
+    "memory",
+    "belief",
+    "cognitive",
+    "agent",
+    "AI"
+  ],
+  "author": "Skysphere AI Labs <hello@skysphere.ai>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
   }
 }
