@@ -125,8 +125,10 @@ Full setup from zero to working BEE — takes about 2 minutes.
 ### Step 1 — Install the package
 
 ```bash
-npm install -g openclaw-bee
+npm install -g openclaw-bee --loglevel=error
 ```
+
+> You may see deprecation warnings during install — these come from `better-sqlite3`'s native build tools and are harmless. The install succeeds regardless. Using `--loglevel=error` suppresses them.
 
 ### Step 2 — Edit your OpenClaw config
 

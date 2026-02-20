@@ -1,6 +1,6 @@
 {
   "name": "openclaw-bee",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "BEE — Belief Extraction Engine. Cognitive memory persistence for OpenClaw agents.",
   "type": "module",
   "exports": {
@@ -19,7 +19,14 @@
     "prepublishOnly": "echo 'OpenClaw loads TypeScript directly — no build step needed'"
   },
   "dependencies": {
-    "better-sqlite3": "^11.0.0"
+    "better-sqlite3": "^12.6.2"
+  },
+  "overrides": {
+    "glob": "^11.0.0",
+    "tar": "^7.4.3",
+    "npmlog": "^7.0.1",
+    "gauge": "^5.0.2",
+    "are-we-there-yet": "^4.0.2"
   },
   "peerDependencies": {
     "openclaw": "*"

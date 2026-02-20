@@ -28,7 +28,7 @@ Beliefs live in a SQLite database (`vector.db`) and persist indefinitely across 
 
 **From npm (recommended):**
 ```bash
-npm install -g openclaw-bee
+npm install -g openclaw-bee --loglevel=error
 ```
 
 **From GitHub (latest):**
