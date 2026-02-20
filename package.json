@@ -1,0 +1,9 @@
+{
+  "name": "openclaw-bee",
+  "version": "0.1.0",
+  "description": "BEE — Belief Extraction Engine. Cognitive memory recall for OpenClaw.",
+  "type": "module",
+  "dependencies": {
+    "better-sqlite3": "^11.0.0"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "id": "bee",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "dbPath": {
+        "type": "string",
+        "description": "Path to the vector.db SQLite database containing beliefs table"
+      },
+      "maxCoreBeliefs": {
+        "type": "number",
+        "minimum": 1,
+        "maximum": 20,
+        "default": 10
+      },
+      "maxActiveBeliefs": {
+        "type": "number",
+        "minimum": 1,
+        "maximum": 10,
+        "default": 5
+      },
+      "maxRecalledBeliefs": {
+        "type": "number",
+        "minimum": 1,
+        "maximum": 10,
+        "default": 5
+      },
+      "maxOutputChars": {
+        "type": "number",
+        "minimum": 500,
+        "maximum": 4000,
+        "default": 2000
+      },
+      "debug": {
+        "type": "boolean",
+        "default": false
+      },
+      "agentId": {
+        "type": "string",
+        "description": "Agent identity key for belief namespace scoping (defaults to 'vector')",
+        "default": "vector"
+      },
+      "extractionEnabled": {
+        "type": "boolean",
+        "description": "Enable/disable belief extraction at session end",
+        "default": true
+      },
+      "extractionModel": {
+        "type": "string",
+        "description": "Model used for belief extraction (defaults to cheapest Haiku)",
+        "default": "anthropic/claude-haiku-4-5"
+      },
+      "extractionMinConfidence": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1,
+        "description": "Minimum confidence threshold for extracted beliefs to be stored",
+        "default": 0.55
+      },
+      "spawnBudgetWarning": {
+        "type": "number",
+        "minimum": 1,
+        "description": "Warn when subagent spawn count exceeds this threshold per session",
+        "default": 20
+      }
+    },
+    "required": []
+  }
+}
