@@ -118,28 +118,23 @@ test_cog_integration   8/8    PASS
 
 ---
 
-## Install
+## Getting Started
 
-**Via ClawHub** (recommended):
+Full setup from zero to working BEE — takes about 2 minutes.
+
+### Step 1 — Install the package
+
 ```bash
-npx clawhub install openclaw-bee
+npm install -g openclaw-bee
 ```
 
-**Via npm:**
-```bash
-npm install openclaw-bee
-```
+### Step 2 — Edit your OpenClaw config
 
-**Via GitHub:**
-```bash
-npm install github:skysphere-labs/openclaw-bee
-```
-
-Then add to `~/.openclaw/openclaw.json`:
+Open `~/.openclaw/openclaw.json` and add BEE under the `plugins` section. If `plugins` doesn't exist yet, add the whole block:
 
 ```json
 {
-  "extensions": {
+  "plugins": {
     "entries": {
       "bee": {
         "enabled": true,
@@ -155,12 +150,47 @@ Then add to `~/.openclaw/openclaw.json`:
 }
 ```
 
-Restart the gateway:
+> **Note:** If you already have other plugins configured (e.g. telegram), just add the `"bee"` block inside `"entries"` alongside them. Don't replace the whole file.
+
+### Step 3 — Restart the gateway
+
 ```bash
 openclaw gateway restart
 ```
 
-BEE runs its schema migration on first start and begins capturing beliefs immediately.
+### Step 4 — Verify it's working
+
+BEE runs its database migration automatically on first start. After a session or two, ask your agent:
+
+```
+How many beliefs do you have?
+```
+
+Or check the database directly:
+
+```bash
+sqlite3 ~/.openclaw/workspace/state/vector.db "SELECT COUNT(*), scope, status FROM beliefs GROUP BY scope, status;"
+```
+
+You should see beliefs accumulating after sessions complete. That means BEE is extracting and storing knowledge — your agents are no longer starting cold.
+
+---
+
+## Configuration Options
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `dbPath` | *required* | Path to your SQLite database |
+| `agentId` | `"main"` | Namespace for belief scoping (use different IDs per agent in multi-agent setups) |
+| `extractionEnabled` | `true` | Enable/disable belief extraction at session end |
+| `extractionModel` | `"anthropic/claude-haiku-4-5"` | Model used for extraction — cheapest capable model works well |
+| `extractionMinConfidence` | `0.55` | Minimum confidence to store a belief (0–1) |
+| `maxCoreBeliefs` | `10` | Core beliefs injected into every session |
+| `maxActiveBeliefs` | `5` | Recently active beliefs injected |
+| `maxRecalledBeliefs` | `5` | Semantically recalled beliefs per query |
+| `maxOutputChars` | `2000` | Max chars of belief context injected per session |
+| `debug` | `false` | Enable verbose logging |
+| `spawnBudgetWarning` | `20` | Warn when subagent spawns exceed this threshold per session |
 
 ---
 
