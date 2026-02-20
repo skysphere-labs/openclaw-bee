@@ -28,7 +28,7 @@ Beliefs live in a SQLite database (`vector.db`) and persist indefinitely across 
 
 **From npm (recommended):**
 ```bash
-npm install -g @skysphere-labs/openclaw-bee
+npm install -g openclaw-bee
 ```
 
 **From GitHub (latest):**
@@ -112,5 +112,5 @@ For setups with multiple named agents (VECTOR, FORGE, ORACLE, etc.), use differe
 ## Source
 
 - GitHub: https://github.com/skysphere-labs/openclaw-bee
-- npm: https://www.npmjs.com/package/@skysphere-labs/openclaw-bee
+- npm: https://www.npmjs.com/package/openclaw-bee
 - Built by [Skysphere AI Labs](https://skysphere.ai)

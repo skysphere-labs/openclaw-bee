@@ -1,5 +1,5 @@
 {
-  "name": "@skysphere-labs/openclaw-bee",
+  "name": "openclaw-bee",
   "version": "0.1.1",
   "description": "BEE — Belief Extraction Engine. Cognitive memory persistence for OpenClaw agents.",
   "type": "module",
