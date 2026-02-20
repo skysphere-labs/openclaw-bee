@@ -120,11 +120,51 @@ test_cog_integration   8/8    PASS
 
 ## Install
 
+**Via ClawHub** (recommended):
 ```bash
-openclaw plugin install skysphere-labs/openclaw-bee
+npx clawhub install openclaw-bee
 ```
 
-**[github.com/skysphere-labs/openclaw-bee](https://github.com/skysphere-labs/openclaw-bee)** · MIT License
+**Via npm:**
+```bash
+npm install openclaw-bee
+```
+
+**Via GitHub:**
+```bash
+npm install github:skysphere-labs/openclaw-bee
+```
+
+Then add to `~/.openclaw/openclaw.json`:
+
+```json
+{
+  "extensions": {
+    "entries": {
+      "bee": {
+        "enabled": true,
+        "config": {
+          "dbPath": "~/.openclaw/workspace/state/vector.db",
+          "agentId": "main",
+          "extractionEnabled": true,
+          "extractionModel": "anthropic/claude-haiku-4-5"
+        }
+      }
+    }
+  }
+}
+```
+
+Restart the gateway:
+```bash
+openclaw gateway restart
+```
+
+BEE runs its schema migration on first start and begins capturing beliefs immediately.
+
+---
+
+**[clawhub.com/skills/openclaw-bee](https://clawhub.com/skills/openclaw-bee)** · **[npmjs.com/package/openclaw-bee](https://npmjs.com/package/openclaw-bee)** · **[github.com/skysphere-labs/openclaw-bee](https://github.com/skysphere-labs/openclaw-bee)** · MIT License
 
 ---
 
