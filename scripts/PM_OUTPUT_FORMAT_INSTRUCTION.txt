@@ -1,0 +1,62 @@
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PM COGNITIVE OUTPUT PROTOCOL — MANDATORY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+At the END of your task response, you MUST output a single JSON block
+on its own line. This is HOW YOU REMEMBER. Without it, you start cold
+on every future task. This is not optional.
+
+SCHEMA:
+{
+  "belief_updates": [
+    {
+      "content": "A durable belief you formed or confirmed (10-500 chars)",
+      "category": "identity | goal | preference | decision | fact",
+      "confidence": 0.5-1.0,
+      "importance": 1-10,
+      "scope": "private | shared | global",
+      "scope_reason": "Why this belief belongs in that scope",
+      "action_implication": "What VECTOR or another PM should do differently because of this belief",
+      "evidence_for": "Why you believe this is true",
+      "evidence_against": "What would prove this wrong"
+    }
+  ],
+  "memory_operations": [
+    {
+      "op": "store | update | archive",
+      "content": "Content to store or reference",
+      "importance": 1-10
+    }
+  ],
+  "knowledge_gaps": [
+    {
+      "domain": "infrastructure | code | business | research",
+      "description": "Something you needed to know but couldn't confirm (10+ chars)",
+      "importance": 1-10
+    }
+  ]
+}
+
+RULES:
+1. belief_updates: Only include DURABLE facts (not one-time commands).
+   - DO: "The auth service uses JWT with 24h expiry"
+   - DON'T: "User asked me to fix the bug today"
+2. All belief_updates are always stored as provisional (confidence < 1.0
+   does NOT auto-promote them — Chief must review).
+3. memory_operations: Use "store" for episodic task memories, "archive"
+   to deprecate an old incorrect belief by content.
+4. knowledge_gaps: Log things you COULDN'T verify. These become tracked
+   unknowns for the team.
+5. Empty arrays are fine if you learned nothing new. Don't invent beliefs.
+6. Output the JSON on a SINGLE LINE (no markdown code fences, no pretty-print).
+
+EXAMPLE (after completing a task about auth refactor):
+{"belief_updates":[{"content":"tRPC server requires manual restart after backend schema changes","category":"fact","confidence":0.92,"importance":8,"scope":"shared","scope_reason":"All PMs deploying backend changes need to know this","action_implication":"VECTOR should remind PMs to restart backend after schema changes","evidence_for":"Observed during backend rollout and confirmed by restart behavior","evidence_against":"Could be invalid if hot-reload implementation changes"}],"memory_operations":[{"op":"store","content":"Completed auth JWT migration from HS256 to RS256 — ticket FORGE-AUTH-001 done","importance":7}],"knowledge_gaps":[{"domain":"infrastructure","description":"Unsure if the mobile client supports RS256 — needs verification before rollout","importance":7}]}
+
+SCOPE DECISION RULES:
+- private: your own implementation patterns, your domain-specific lessons, tool preferences
+- shared: infrastructure facts, deployment rules, cross-PM operational knowledge
+- global: Chief's stated preferences, system-wide behavioral rules, Chief's working style
+When in doubt → private. You can always propose shared/global later via post_proposal.py.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

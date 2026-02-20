@@ -1,0 +1,11 @@
+state/
+*.db
+*.db-wal
+*.db-shm
+__pycache__/
+*.pyc
+.env
+memory/
+tasks/
+projects/
+*.log
